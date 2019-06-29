@@ -6,7 +6,7 @@ const db = require('./journals-model.js');
 //CRUD OPERATIONS 
 
 //GET ARTICLES
-journalRouter.get('/journals',   (req, res) => {
+journalRouter.get('/journals',  (req, res) => {
     db.find()
     .then(journal => {
         res.status(200).json(journal);
@@ -15,6 +15,24 @@ journalRouter.get('/journals',   (req, res) => {
         res.status(500).json({ success: false, message: 'The users information could not be retrieved'})
     })
 })
+//GET JOURNALS FOR SPECIFIC USERS
+journalRouter.get('/journals/user', (req, res) => {
+    console.log(req.body.user_id)
+    const id = req.body.user_id
+        db.getArticleList(id)
+        .then(journalsArch => {
+            if(journalsArch.length > 0) {
+                res.status(200).json(journalsArch)
+            } else {
+                res.status(404).json({message: 'no journals found on user'})
+            } 
+        
+        })
+        .catch(err => {
+            res.status(500).json({  success: false, error: 'error retrieving id'})
+        })
+    
+  });
 
 //POST ARTICLES
 journalRouter.post('/journals',  (req, res) => {
@@ -69,42 +87,4 @@ journalRouter.put('/journals/:id', (req, res) => {
 })
 
 
-// //GET FOR A SPECIFIC USER 
-// //IN REACT PORTION THE ID WILL BE DYNAMIC 
-// journalRouter.get('/articles/user', (req, res) => {
-//     console.log(req.body.user_id)
-//     const id = req.body.user_id
-//         db.getArticleList(id)
-//         .then(userArticle => {
-//             if(userArticle.length > 0) {
-//                 res.status(200).json(userArticle)
-//             } else {
-//                 res.status(404).json({message: 'no articles found on user'})
-//             } 
-        
-//         })
-//         .catch(err => {
-//             res.status(500).json({  success: false, error: 'error retrieving id'})
-//         })
-    
-//   });
-
 module.exports = journalRouter;
-
-
-//  //DELETE ARTICLES
-//  router.delete('/:id', (req, res) => {
-//     const {id} = req.params;
-//     db.
-//     remove(id)
-//     .then(data => {
-//         if (data) {
-//             res.status(204).end();
-//         } else {
-//             res.status(404).json({ success: false, message: "The survey with the specified ID does not exist." });
-//         }
-//     })
-//         .catch(err => {
-//             res.status(500).json({ error: "The survey could not be removed" })  
-//     })
-// })

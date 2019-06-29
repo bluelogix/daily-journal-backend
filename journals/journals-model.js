@@ -12,7 +12,6 @@ module.exports = {
   function find() {
     return db('journals');
   }
-  
   function findById(id) {
     return db('journals').where({ id: Number(id) });
   }
@@ -21,7 +20,7 @@ module.exports = {
   function getArticleList(userId) {
     return db('journals')
       .join('users ', 'users.id', 'journals.user_id')
-      .select('journals.id', 'journals.title', 'journals.content', 'journals.abstract', 'journals.image', 'journals.category', 'users.username')
+      .select('journals.id', 'journals.title', 'journals.content','journals.category', 'users.username')
       .where('journals.user_id', userId);
   }
   
