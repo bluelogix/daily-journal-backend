@@ -1,3 +1,3 @@
-#Daily Journal Backend
+# Daily Journal Backend
 
 - Node & Express

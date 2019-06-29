@@ -4,9 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelogix/daily-journal-backend.git"
   },
   "keywords": [],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "helmet": "^3.18.0",
+    "jest": "^24.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.18.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1",
+    "sqlite3": "^4.0.9"
+  }
 }
